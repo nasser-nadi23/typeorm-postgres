@@ -1,14 +1,17 @@
 import "reflect-metadata";
 import { createConnection } from "typeorm";
 import { User } from "./auth/entity/user.entity";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 createConnection({
   type: "postgres",
-  host: "localhost",
   port: 5432,
-  username: "postgres",
-  password: "Admin",
-  database: "nasser",
+  host: process.env.DB_HOST,
+  username: process.env.DB_USERNAME,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME,
   entities: [User],
   synchronize: true,
 })

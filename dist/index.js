@@ -1,15 +1,20 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 require("reflect-metadata");
 var typeorm_1 = require("typeorm");
 var user_entity_1 = require("./auth/entity/user.entity");
+var dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
 (0, typeorm_1.createConnection)({
     type: "postgres",
-    host: "localhost",
     port: 5432,
-    username: "postgres",
-    password: "Admin",
-    database: "nasser",
+    host: process.env.DB_HOST,
+    username: process.env.DB_USERNAME,
+    password: process.env.DB_PASS,
+    database: process.env.DB_NAME,
     entities: [user_entity_1.User],
     synchronize: true,
 })
